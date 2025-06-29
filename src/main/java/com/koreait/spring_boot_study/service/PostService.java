@@ -1,5 +1,6 @@
 package com.koreait.spring_boot_study.service;
 
+// B/S logic, 회원가입을 해서.. ID의 중복체크 등..
 
 import com.koreait.spring_boot_study.repository.PostRepository;
 import org.springframework.stereotype.Service;

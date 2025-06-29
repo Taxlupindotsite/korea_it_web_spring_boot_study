@@ -1,5 +1,8 @@
 package com.koreait.spring_boot_study.repository;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class PostRepository {
 public String getPost(){
     System.out.println("레포지토리까지 요청이 왔다감.");

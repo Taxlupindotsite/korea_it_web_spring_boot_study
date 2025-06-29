@@ -1,7 +1,12 @@
 package com.koreait.spring_boot_study.controller;
 
 
+// Controller
+// 요청을 받아주고, 어떤 일을 해서 다시 뭔가를 반환함
+
+
 import com.koreait.spring_boot_study.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,10 +32,29 @@ JSON, 문자열 등 다양한 데이터를 반환 => Rest Api 서버(웹서버)
 @RequestMapping("/post")
 public class PostController {
 
-    private final PostService postService;
+//    Autowired
+
+     @Autowired // 필요한 객체를 자동으로 주입해주는 어노테이션
+     private PostService postService;
+//    단, PostService를 주입되기 전 시점에서 사용하게 되면 NullPointException이 발생할수 있음
+//    예를들어 생성자에서 바로 쓴다거나 아니면서비스, 레포지토리 어노테이션을 안 붙였거나
+
+
+//    private final PostService postService;
+
+//    public PostController(PostService postService){
+//        this.postService = postService;
+//    }
+
+//    생성자 방법이 더 권장됨 -> 명확함
+//    final이 있기에 불변을 보장
+//    생성자로 주입하면 객체가 생성될 때 필수로 의존성을 받아야함.
+//    그럼 이후에 그 의존성을 바꿀수 없어 안정적임
+//    애초에 객체 생성이 되기도 전에 생성자를 통해 주입이 완료됨, 생성 전부터 준비가 완료됨
+
 
 /*
-    Inversion Of COntrol -> 제어의 역전
+    Inversion Of Control -> 제어의 역전
     객체 생성과 제어의 주도권을 개발자가 아닌, 스프링부트가 갖는 것
     ioc container => 스프링부트가 만든 객체들을 담아두고 관리하는 창고
     필요한 곳이 있으면 꺼내서 넣어줌
@@ -42,9 +66,6 @@ public class PostController {
 
  */
 
-    public PostController(PostService postService){
-        this.postService = postService;
-    }
 
     @GetMapping("/get")
     public String getPost(){
